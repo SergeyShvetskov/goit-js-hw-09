@@ -16,3 +16,15 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.value {
+  width: 65px;
+  display: block;
+  font-size: 35px;
+}
+.label {
+  font-size: 12px;
+}
+.field {
+  display: block;
+}
