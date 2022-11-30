@@ -151,7 +151,7 @@ const dataMinutes = document.querySelector('[data-minutes]');
 const dataSeconds = document.querySelector('[data-seconds]');
 
 let setTimer = document.querySelector('.timer');
-setTimer.style.display = "flex";
+setTimer.style.display = 'flex';
 setTimer.style.textAlign = 'center';
 setTimer.style.textTransform = 'uppercase';
 let selcDate = null;

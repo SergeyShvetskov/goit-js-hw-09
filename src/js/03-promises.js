@@ -40,13 +40,13 @@
 //   }
 // }
 
-// Доповни код функції createPromise таким чином, щоб 
+// + Доповни код функції createPromise таким чином, щоб 
 // вона повертала один проміс, який виконується або 
 // відхиляється через delay часу.Значенням промісу 
 // повинен бути об'єкт, в якому будуть властивості 
 // position і delay зі значеннями однойменних параметрів.
 // Використовуй початковий код функції для вибору того,
-//   що потрібно зробити з промісом - виконати або відхилити.
+// що потрібно зробити з промісом - виконати або відхилити.
 
 // createPromise(2, 1500)
 //   .then(({ position, delay }) => {
@@ -63,15 +63,53 @@
 // Наступний функціонал не обов'язковий для здавання 
 // завдання, але буде хорошою додатковою практикою.
 
-// Для відображення повідомлень користувачеві, замість
+// + Для відображення повідомлень користувачеві, замість
 // console.log(), використовуй бібліотеку notiflix.
+import Notiflix from "notiflix";
 
+// const firstDelay = document.querySelector('[name="delay"]');
+// const delayStep = document.querySelector('[name="step"]');
+// const amount = document.querySelector('[name="amount"]');
+const myForm = document.querySelector('.form');
+
+myForm.addEventListener('submit', onSubmit);
 
 function createPromise(position, delay) {
-  const shouldResolve = Math.random() > 0.3;
-  if (shouldResolve) {
-    // Fulfill
-  } else {
-    // Reject
+  // console.log(`${position}, ${delay}`);
+  return new Promise((resolve, reject) => {
+    const shouldResolve = Math.random() > 0.3;
+    setTimeout(() => { 
+      if (shouldResolve) {
+      // Fulfill
+        resolve({position, delay});
+    } else {
+      // Reject
+        reject({position, delay});
+    }
+    }, delay)
+  });
+}
+
+
+function onSubmit(event) {
+  
+  event.preventDefault();
+  const {
+    elements: { delay, step, amount }
+  } = event.currentTarget;
+
+  console.log(delay.value, step.value, amount.value);
+  for (let index = 0; index < amount.value; index++) {
+    
+    createPromise(index, delay.value)
+    .then(({ position, delay }) => {
+    Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+  })
+  .catch(({ position, delay }) => {
+    Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+  });
+    
   }
+  
+  // event.currentTarget.reset();
 }
