@@ -95,11 +95,11 @@ function onSubmit(event) {
   
   event.preventDefault();
   const {
-    elements: { delay, step, amount }
+    elements: { delay, step, amount }          
   } = event.currentTarget;
 
-  console.log(delay.value, step.value, amount.value);
-  for (let index = 0; index < amount.value; index++) {
+  // console.log(delay.value, step.value, amount.value);
+  for (let index = 1; index < amount.value; index++) {
     
     createPromise(index, delay.value)
     .then(({ position, delay }) => {
