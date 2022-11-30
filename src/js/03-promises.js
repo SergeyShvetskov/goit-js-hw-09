@@ -92,16 +92,18 @@ function createPromise(position, delay) {
 
 
 function onSubmit(event) {
-  
   event.preventDefault();
-  const {
-    elements: { delay, step, amount }          
-  } = event.currentTarget;
+  const formData = new FormData(myForm)
 
-  // console.log(delay.value, step.value, amount.value);
-  for (let index = 1; index < amount.value; index++) {
-    
-    createPromise(index, delay.value)
+  let fDelay = formData.get('delay');
+  const fStep = formData.get('step');
+  const fAmont = formData.get('amount');
+
+  // console.log(fDelay, fStep, fAmont);
+  for (let index = 1; index < fAmont; index++) {
+    fDelay = Number(fDelay) + Number(fStep);
+    console.log(fDelay);
+    createPromise(index, fDelay)
     .then(({ position, delay }) => {
     Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
   })
